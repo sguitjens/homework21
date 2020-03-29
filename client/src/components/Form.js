@@ -1,12 +1,10 @@
 import React from "react";
 
-// This file exports the Input, TextArea, and FormBtn components
-
 export function Input(props) {
   console.log("input props", props);
   return (
     <div className="form-group">
-    <label><h4>{props.name}</h4></label>
+    <label>{props.name}</label>
       <input className="form-control" {...props} />
     </div>
   );
