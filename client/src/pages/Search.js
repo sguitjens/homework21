@@ -1,22 +1,24 @@
 import React, { useState, useEffect } from "react";
-import Results from "../components/Results";
+import { Card, CardContent, CardHeader } from '@material-ui/core';
 import Book from "../components/Book";
-import { Input, FormBtn, } from "../components/Form"
+import Header from "../components/Header";
+import { FormInput, FormBtn } from "../components/FormInput";
 import API from "./utils/API";
 
 function Search() {
   const [formObject, setFormObject] = useState({}); // using this to get book title
-  const [bookData, setBookData] = useState([]); // using this for book data from the API call
+  const [bookData, setBookData] = useState({items: []}); // using this for book data from the API call
 
   function handleInputChange(event) {
-    const { name, value } = event.target;
-    console.log("NAME", value);
-    setFormObject({...formObject, [name]: value});
-    console.log("FORM OBJECT", formObject);
+    const { value } = event.target;
+    setFormObject({...formObject, "title": value}); // had to hard code 'title' for some reason
   }
 
   useEffect(() => {
-    console.log("BOOK DATA EFFECT", bookData);
+    console.log("BOOK DATA EFFECT", bookData.items);
+    console.log("just book data", bookData);
+    // console.log(bookData[0].volumeInfo.imageLinks);
+    console.log("FORMOBJECT", formObject);
   })
 
   function handleFormSubmit(event) {
@@ -25,46 +27,51 @@ function Search() {
     if(formObject.title) {
       API.getGoogleBooks(formObject.title) // want to get the list of books
       .then(response => {
-        console.log("RESPONSE", response.data.items); // this is working
-        setBookData(response.data.items);
-        // console.log("BOOK DATA", bookData);
+        setBookData(response.data);
       })
       .catch(err => console.log("ERROR", err));
     }
   }
 
   return (
-    <div className="search-page">
-      <header className="search-page-header">
-      </header>
-      <div className="book-search">
-        {/* <Title></Title> */}
-        {/* <SearchForm></SearchForm> */}
-        <form>
-            <Input
-              onChange={handleInputChange}
-              name="title"
-              placeholder="Search for a book by title"
-            />
-            <FormBtn
-              disabled={!(formObject.title)}
-              onClick={handleFormSubmit}
+    <div>
+      <Header></Header>
+      <Card>
+        <CardHeader
+          title="Search for a Book"
+        >
+        </CardHeader>
+        <CardContent>
+          <FormInput
+            id="standard-full-width"
+            onChange={handleInputChange}
+            label="Title"
+            placeholder="Search for a book by title"
             >
-              Submit
-            </FormBtn>
-        </form>
-        {bookData.map(book => (
+          </FormInput>
+          <FormBtn
+            disabled={!(formObject.title)}
+            onClick={handleFormSubmit}>
+            SEARCH
+          </FormBtn>
+        </CardContent>
+      </Card>
+        {bookData.items.map(book => (
+          <div>
           <Book
+            leftButton="View"
+            rightButton="Save"
             title={book.volumeInfo.title}
+            author={book.volumeInfo.authors}
             description={book.volumeInfo.description}
-            image={book.volumeInfo.imageLinks.thumbnail ? book.volumeInfo.imageLinks.thumbnail : null}
+            image={book.volumeInfo.imageLinks ? 
+              book.volumeInfo.imageLinks.thumbnail :
+              "/images/no_picture_available.png"
+              }
             infoLink={book.volumeInfo.infoLink}
           ></Book>
+          </div>
         ))}
-        <Results>
-
-        </Results>
-      </div>
     </div>
   );
 }
