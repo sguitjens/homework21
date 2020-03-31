@@ -33,6 +33,21 @@ function Search() {
     }
   }
 
+  function handleSaveClick(event, id) {
+    event.preventDefault();
+    const bookToSave = bookData.items.find(book => book.id = id);
+    console.log("bookData.items", bookData.items);
+    console.log("bookToSave", bookToSave);
+    API.saveBook({
+      title: bookToSave.title,
+      authors: bookToSave.authors,
+      description: bookToSave.description,
+      image: bookToSave.image,
+      infoLink: bookToSave.infoLink
+    }).then(result => console.log(result))
+    .catch(err => console.log(err));
+  }
+
   return (
     <div>
       <Header></Header>
@@ -56,19 +71,21 @@ function Search() {
           </FormBtn>
         </CardContent>
       </Card>
-        {bookData.items.map(book => (
-          <div>
+        {bookData.items.map((book, index) => (
+          <div id={index}>
           <Book
             leftButton="View"
             rightButton="Save"
             title={book.volumeInfo.title}
-            author={book.volumeInfo.authors}
+            authors={book.volumeInfo.authors}
             description={book.volumeInfo.description}
             image={book.volumeInfo.imageLinks ? 
               book.volumeInfo.imageLinks.thumbnail :
               "/images/no_picture_available.png"
               }
             infoLink={book.volumeInfo.infoLink}
+            id={book.id}
+            handleSaveClick={handleSaveClick}
           ></Book>
           </div>
         ))}
