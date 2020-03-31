@@ -15,10 +15,10 @@ function Search() {
   }
 
   useEffect(() => {
-    console.log("BOOK DATA EFFECT", bookData.items);
-    console.log("just book data", bookData);
+    // console.log("BOOK DATA EFFECT", bookData.items);
+    // console.log("just book data", bookData);
     // console.log(bookData[0].volumeInfo.imageLinks);
-    console.log("FORMOBJECT", formObject);
+    // console.log("FORMOBJECT", formObject);
   })
 
   function handleFormSubmit(event) {
@@ -27,6 +27,7 @@ function Search() {
     if(formObject.title) {
       API.getGoogleBooks(formObject.title) // want to get the list of books
       .then(response => {
+        console.log("FORM SUBMIT RESPONSE", response)
         setBookData(response.data);
       })
       .catch(err => console.log("ERROR", err));
@@ -38,7 +39,7 @@ function Search() {
     const bookToSave = bookData.items.find(book => book.id = id);
     console.log("bookData.items", bookData.items);
     console.log("bookToSave", bookToSave);
-    API.saveBook({
+    API.saveBook({ //FAILS
       title: bookToSave.title,
       authors: bookToSave.authors,
       description: bookToSave.description,
@@ -72,7 +73,7 @@ function Search() {
         </CardContent>
       </Card>
         {bookData.items.map((book, index) => (
-          <div id={index}>
+          <div key={index}>
           <Book
             leftButton="View"
             rightButton="Save"

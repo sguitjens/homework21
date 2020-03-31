@@ -6,7 +6,7 @@ export function FormInput(props) {
   return (
     <div className="form-group">
       <label>{props.name}</label>
-      <TextField {...props} fullWidth variant="outlined" InputLabelProps={{shrink:true,}}/>
+      <TextField {...props} fullWidth={true} variant="outlined" InputLabelProps={{shrink:true,}}/>
     </div>
   );
 }
@@ -15,7 +15,7 @@ export function FormBtn(props) {
   console.log("formbtn props", props);
   return (
     <Button type="submit" variant="contained" color="primary" {...props}>
-      {props.children}
+      {/* {props.children} */}
     </Button>
   );
 }
