@@ -25,16 +25,16 @@ db.on("error", console.error.bind(console, "connection error:"));
 //   // does something go here?
 // })
 
-app.post("/api/books", ({body}, res) => {
-  console.log("INSIDE THE API/BOOKS ROUTE IN SERVER.JS")
-  Book.create(body)
-  .then(data => {
-    res.json(data);
-  })
-  .catch(err => {
-    res.json(err);
-  })
-})
+// app.post("/api/books", ({body}, res) => {
+//   console.log("INSIDE THE API/BOOKS ROUTE IN SERVER.JS", {body})
+//   Book.create(body)
+//   .then(data => {
+//     res.json(data);
+//   })
+//   .catch(err => {
+//     res.json(err);
+//   })
+// })
 
 // Start the API server
 app.listen(PORT, function() {

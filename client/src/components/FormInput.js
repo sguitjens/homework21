@@ -6,7 +6,7 @@ export function FormInput(props) {
   return (
     <div className="form-group">
       <label>{props.name}</label>
-      <TextField {...props} fullWidth={true} variant="outlined" InputLabelProps={{shrink:true,}}/>
+      <TextField {...props} fullWidth={true} margin="normal" variant="outlined" InputLabelProps={{shrink:true,}}/>
     </div>
   );
 }

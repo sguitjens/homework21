@@ -39,12 +39,12 @@ function Search() {
     const bookToSave = bookData.items.find(book => book.id = id);
     console.log("bookData.items", bookData.items);
     console.log("bookToSave", bookToSave);
-    API.saveBook({ //FAILS
-      title: bookToSave.title,
-      authors: bookToSave.authors,
-      description: bookToSave.description,
-      image: bookToSave.image,
-      infoLink: bookToSave.infoLink
+    API.saveBook({
+      title: bookToSave.volumeInfo.title,
+      authors: bookToSave.volumeInfo.authors,
+      description: bookToSave.volumeInfo.description,
+      image: bookToSave.volumeInfo.image,
+      infoLink: bookToSave.volumeInfo.infoLink
     }).then(result => console.log(result))
     .catch(err => console.log(err));
   }

@@ -24,10 +24,10 @@ function Book(props) {
         {/* {props.children} */}
       <CardContent>
         <Grid container spacing={3}>
-          <Grid item xs={3}>
+          <Grid item sm={3} xs={12}>
             <img src={props.image} alt="book thumbnail"></img>
           </Grid>
-          <Grid item xs={9}>
+          <Grid item sm={9} xs={12}>
             <h3>{props.title}</h3>
             <h5>Authors: {props.authors.join()}</h5>
             <p><strong>Description:</strong> {props.description}</p> 
