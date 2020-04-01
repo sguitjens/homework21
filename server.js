@@ -1,8 +1,10 @@
 const mongoose = require("mongoose");
 const express = require("express");
 const routes = require("./routes");
+const Book = require("./models/book");
 const app = express();
 const PORT = process.env.PORT || 3001;
+// const googlebooksSchema = 
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
@@ -16,6 +18,23 @@ app.use(routes);
 
 // Connect to the Mongo DB
 mongoose.connect(process.env.MONGODB_URI || "mongodb://127.0.0.1/googlebooks");
+let db = mongoose.connection;
+db.on("error", console.error.bind(console, "connection error:"));
+// db.once("open", function() {
+//   console.log("connected to googlebooks db");
+//   // does something go here?
+// })
+
+app.post("/api/books", ({body}, res) => {
+  console.log("INSIDE THE API/BOOKS ROUTE IN SERVER.JS")
+  Book.create(body)
+  .then(data => {
+    res.json(data);
+  })
+  .catch(err => {
+    res.json(err);
+  })
+})
 
 // Start the API server
 app.listen(PORT, function() {
