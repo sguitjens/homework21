@@ -86,7 +86,7 @@ function Search() {
               }
             infoLink={book.volumeInfo.infoLink}
             id={book.id}
-            handleSaveClick={handleSaveClick}
+            handleClick={handleSaveClick}
           ></Book>
           </div>
         ))}

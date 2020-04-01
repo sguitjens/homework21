@@ -6,7 +6,7 @@ function Book(props) {
 
   function handleSaveClick(event) {
     event.preventDefault();
-    API.saveBook(props);
+    // API.saveBook(props);
   }
 
   // console.log("BOOK PROPS", props);
@@ -18,7 +18,7 @@ function Book(props) {
             <a href={props.infoLink} target="_blank" rel="noopener noreferrer">
               <Button variant="contained" color="default">{props.leftButton}</Button>
             </a>
-            <Button variant="contained" color="default" onClick={event => props.handleSaveClick(event, props.id)}>{props.rightButton}</Button>
+            <Button variant="contained" color="default" onClick={event => props.handleClick(event, props.id)}>{props.rightButton}</Button>
           </ButtonGroup>
         } />
         {/* {props.children} */}
@@ -29,7 +29,8 @@ function Book(props) {
           </Grid>
           <Grid item sm={9} xs={12}>
             <h3>{props.title}</h3>
-            <h5>Authors: {props.authors.join()}</h5>
+            {/* <h5>Authors: {props.authors.join()}</h5> */}
+            <h5>Authors: {props.authors}</h5>
             <p><strong>Description:</strong> {props.description}</p> 
           </Grid>
         </Grid>
