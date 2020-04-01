@@ -60,7 +60,7 @@ function Saved() {
             // image={book.volumeInfo.imageLinks.thumbnail ?
             //   book.volumeInfo.imageLinks.thumbnail :
             //   "/images/no_picture_available.png"}
-            image={"/images/no_picture_available.png"}
+            image={book.image}
             infoLink={book.infoLink}
             handleClick={handleDeleteClick}
           ></Book>

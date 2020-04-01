@@ -4,10 +4,10 @@ import API from "../pages/utils/API";
 
 function Book(props) {
 
-  function handleSaveClick(event) {
-    event.preventDefault();
-    // API.saveBook(props);
-  }
+  // function handleSaveClick(event) {
+  //   event.preventDefault();
+  //   // API.saveBook(props);
+  // }
 
   // console.log("BOOK PROPS", props);
   return (

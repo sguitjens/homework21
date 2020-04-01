@@ -43,8 +43,9 @@ function Search() {
       title: bookToSave.volumeInfo.title,
       authors: bookToSave.volumeInfo.authors,
       description: bookToSave.volumeInfo.description,
-      image: bookToSave.volumeInfo.image,
-      infoLink: bookToSave.volumeInfo.infoLink
+      image: bookToSave.volumeInfo.imageLinks.thumbnail,
+      infoLink: bookToSave.volumeInfo.infoLink,
+      id: bookToSave.volumeInfo.id
     }).then(result => console.log(result))
     .catch(err => console.log(err));
   }
