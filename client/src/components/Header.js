@@ -1,8 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { AppBar, Toolbar, Button, Grid } from '@material-ui/core';
 
 function Header(props) {
   console.log("HEADER PROPS", props);
+
   return (
     <AppBar position="static">   
       <Toolbar>
@@ -11,8 +13,8 @@ function Header(props) {
             <div>Google Books Search</div>
           </Grid>
           <Grid item sm={3} xs={12}>
-            <Button color="inherit">Search</Button>
-            <Button color="inherit">Saved</Button>
+            <Link to="/"><Button color="inherit">Search</Button></Link>
+            <Link to="/saved"><Button color="inherit">Saved</Button></Link>
           </Grid>
         </Grid>
       </Toolbar>
