@@ -11,7 +11,7 @@ function Search() {
 
   function handleInputChange(event) {
     const { value } = event.target;
-    setFormObject({...formObject, "title": value}); // had to hard code 'title' for some reason
+    setFormObject({...formObject, title: value}); // had to hard code 'title' for some reason
   }
 
   useEffect(() => {
@@ -29,6 +29,7 @@ function Search() {
       .then(response => {
         console.log("FORM SUBMIT RESPONSE", response)
         setBookData(response.data);
+        setFormObject({...formObject, title: ""});
       })
       .catch(err => console.log("ERROR", err));
     }
@@ -36,14 +37,16 @@ function Search() {
 
   function handleSaveClick(event, id) {
     event.preventDefault();
-    const bookToSave = bookData.items.find(book => book.id = id);
+    const bookToSave = bookData.items.find(book => book.id === id);
     console.log("bookData.items", bookData.items);
     console.log("bookToSave", bookToSave);
     API.saveBook({
       title: bookToSave.volumeInfo.title,
       authors: bookToSave.volumeInfo.authors,
       description: bookToSave.volumeInfo.description,
-      image: bookToSave.volumeInfo.imageLinks.thumbnail,
+      image:bookToSave.volumeInfo.imageLinks ? 
+        bookToSave.volumeInfo.imageLinks.thumbnail :
+        "/images/no_picture_available.png",
       infoLink: bookToSave.volumeInfo.infoLink,
       id: bookToSave.volumeInfo.id
     }).then(result => console.log(result))
@@ -64,6 +67,7 @@ function Search() {
             onChange={handleInputChange}
             label="Title"
             placeholder="Search for a book by title"
+            value={formObject.title}
             >
           </FormInput>
           <FormBtn
